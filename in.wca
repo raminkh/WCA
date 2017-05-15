@@ -1,0 +1,52 @@
+#Ramin Khajeh
+#05/14/17
+#Lammps simulation of WCA particles in 2d
+#
+#____initialize the system
+clear 
+
+# particle diameter is set to 1.0 
+# sigma is set to 1.0
+variable       scaled_pack_frac equal 0.60
+variable       boxL equal 20
+variable       N equal ${scaled_pack_frac}*${boxL}*${boxL}
+variable       T equal 1.0
+
+units          lj
+dimension      2
+boundary       p p p
+atom_style     atomic 
+atom_modify    map array 
+
+###___create atoms
+lattice        sq 0.3111 origin 0.0 0.0 0.0
+region         box block 0 ${boxL} 0 ${boxL} -0.1 0.1 units box
+create_box     1 box 
+create_atoms   1 box  
+mass           1 1.0
+fix            2d all enforce2d
+create_atoms   1 random ${N} 324523 box
+
+###___Define Interatomic Potential
+pair_style     lj/cut 1.1225 
+pair_coeff     * * 1.0 1.0
+
+neighbor       0.30 bin 
+neigh_modify   delay 0 every 1 check yes 
+
+##___Define Settings
+#compute        eng all pe/atom
+timestep       0.005
+fix            integrator all nve
+fix            dynamics all langevin ${T} ${T} 1.0 60284
+thermo         100
+min_style      fire
+
+minimize       1e-4 1e-4 1000 1000
+reset_timestep 0
+
+dump           dump_1 all atom 1 final.lammpstrj
+dump           dump_2 all atom 1 traj.xyz
+dump_modify    dump_2 every 10000 sort id first no
+run            10000
+
