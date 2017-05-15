@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sys import argv
 
 def distance(p1,p2,L):
   s = 0
@@ -13,10 +14,11 @@ d_cut = 0.5
 x = data[:,2]
 y = data[:,3]
 N = len(x)
+boxL = int(argv[1])
 adjMatrix = np.zeros([N,N])
 for i in range(N):
     for j in range(N):
-        d = distance((x[i],y[i]),(x[j],y[j]),30)
+        d = distance((x[i],y[i]),(x[j],y[j]),boxL)
         if d<d_cut:
             adjMatrix[i,j] = 1
         else:

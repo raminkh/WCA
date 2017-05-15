@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sys import argv
 
-N = 196
+N = int(argv[1])
 f = open("traj.xyz","r")
 lines = f.readlines()
 f.close()

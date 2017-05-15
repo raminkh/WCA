@@ -1,9 +1,9 @@
 # WCA
 Simulation of WCA particles in 2d
->> lammps < in.wca
->> vmd final.lammps 
->> remove_lines.py N
->> python wca_analysis.py
+$ lammps < in.wca
+$ vmd final.lammps 
+$ remove_lines.py N
+$ python wca_analysis.py boxL
 
 in.wca:
    - Runs the simulation of N WCA particles in a box of length boxL
