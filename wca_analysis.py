@@ -24,3 +24,4 @@ for i in range(N):
         else:
             adjMatrix[i,j] = 0
 print adjMatrix
+np.savetxt('adjMatrix.out',adjMatrix)

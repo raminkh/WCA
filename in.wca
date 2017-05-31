@@ -7,8 +7,8 @@ clear
 
 # particle diameter is set to 1.0 
 # sigma is set to 1.0
-variable       scaled_pack_frac equal 0.60
-variable       boxL equal 20
+variable       scaled_pack_frac equal 0.10 #previously at 0.60
+variable       boxL equal 10
 variable       N equal ${scaled_pack_frac}*${boxL}*${boxL}
 variable       T equal 1.0
 
