@@ -10,7 +10,7 @@ def distance(p1,p2,L):
   return np.sqrt(s)
 
 data = np.loadtxt('traj.xyz')
-d_cut = 0.5
+d_cut = 0.2
 x = data[:,2]
 y = data[:,3]
 N = len(x)
