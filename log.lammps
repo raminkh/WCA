@@ -34,7 +34,7 @@ Created orthogonal box = (0 0 -0.1) to (10 10 0.1)
 create_atoms   1 box
 Created 36 atoms
 mass           1 1.0
-fix            2d all enforce2d
+fix            1 all enforce2d
 create_atoms   1 random ${N} 324523 box
 create_atoms   1 random 10 324523 box
 Created 10 atoms
@@ -67,9 +67,9 @@ Memory usage per processor = 2.48134 Mbytes
 Step Temp E_pair E_mol TotEng Press 
        0            0    819263.25            0    819263.25    2261597.8 
       64 0.0013676922            0            0 0.0013379597 0.00061546147 
-Loop time of 0.00038 on 1 procs for 64 steps with 46 atoms
+Loop time of 0.000377 on 1 procs for 64 steps with 46 atoms
 
-93.2% CPU use with 1 MPI tasks x no OpenMP threads
+95.5% CPU use with 1 MPI tasks x no OpenMP threads
 
 Minimization stats:
   Stopping criterion = force tolerance
@@ -83,12 +83,12 @@ Minimization stats:
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.000101   | 0.000101   | 0.000101   |   nan | 26.58
-Neigh   | 7.3e-05    | 7.3e-05    | 7.3e-05    |   0.0 | 19.21
-Comm    | 3.9e-05    | 3.9e-05    | 3.9e-05    |   0.0 | 10.26
+Pair    | 8.8e-05    | 8.8e-05    | 8.8e-05    |   0.0 | 23.34
+Neigh   | 7.7e-05    | 7.7e-05    | 7.7e-05    |   0.0 | 20.42
+Comm    | 3.8e-05    | 3.8e-05    | 3.8e-05    |   0.0 | 10.08
 Output  | 0          | 0          | 0          |   0.0 |  0.00
-Modify  | 9e-06      | 9e-06      | 9e-06      |   0.0 |  2.37
-Other   |            | 0.000158   |            |       | 41.58
+Modify  | 1.4e-05    | 1.4e-05    | 1.4e-05    |   0.0 |  3.71
+Other   |            | 0.00016    |            |       | 42.44
 
 Nlocal:    46 ave 46 max 46 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
@@ -222,20 +222,20 @@ Step Temp E_pair E_mol TotEng Press
     9800    1.0668711   0.10444284            0    1.1481211    1.1971611 
     9900    1.1084421  0.055770453            0     1.140116   0.94715292 
    10000   0.98042397   0.14642233            0    1.1055327     1.417933 
-Loop time of 0.678122 on 1 procs for 10000 steps with 46 atoms
+Loop time of 1.10292 on 1 procs for 10000 steps with 46 atoms
 
-Performance: 6370535.095 tau/day, 14746.609 timesteps/s
-77.7% CPU use with 1 MPI tasks x no OpenMP threads
+Performance: 3916871.653 tau/day, 9066.833 timesteps/s
+63.6% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.011503   | 0.011503   | 0.011503   |   0.0 |  1.70
-Neigh   | 0.008311   | 0.008311   | 0.008311   |   0.0 |  1.23
-Comm    | 0.010742   | 0.010742   | 0.010742   |   0.0 |  1.58
-Output  | 0.59334    | 0.59334    | 0.59334    |   0.0 | 87.50
-Modify  | 0.040147   | 0.040147   | 0.040147   |   0.0 |  5.92
-Other   |            | 0.01408    |            |       |  2.08
+Pair    | 0.016569   | 0.016569   | 0.016569   |   0.0 |  1.50
+Neigh   | 0.011001   | 0.011001   | 0.011001   |   0.0 |  1.00
+Comm    | 0.01346    | 0.01346    | 0.01346    |   nan |  1.22
+Output  | 0.98946    | 0.98946    | 0.98946    |   0.0 | 89.71
+Modify  | 0.053958   | 0.053958   | 0.053958   |   0.0 |  4.89
+Other   |            | 0.01847    |            |       |  1.67
 
 Nlocal:    46 ave 46 max 46 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
@@ -259,4 +259,4 @@ Dangerous builds = 0
 
 
 
-Total wall time: 0:00:00
+Total wall time: 0:00:01
