@@ -45,7 +45,7 @@ pos = nx.circular_layout(G)
 nx.draw(G,pos)
 nx.draw_networkx_labels(G,pos)
 
-def dfs_paths(graph, root, target, path=None):
+def dfs_paths_recurse(graph, root, target, path=None):
    if path is None:
       path = [root]
 
@@ -53,15 +53,25 @@ def dfs_paths(graph, root, target, path=None):
       yield path
 
    for vertex in [x for x in graph[root] if x not in path]:
-      for each_path in dfs_paths(graph,vertex,target,path+[vertex]):
+      for each_path in dfs_paths_recurse(graph,vertex,target,path+[vertex]):
          yield each_path
+
+def dfs_paths_iter(graph, start, goal):
+   stack = [(start, [start])]
+   while stack:
+      (vertex, path) = stack.pop()
+      for k in graph[vertex] - set(path):
+         if k == goal:
+            yield path + [k]
+         else:
+            stack.append((k, path + [k]))
 
 nodes = G.nodes()
 linked_node_num = 4
 all_paths = []
 for i in range(len(nodes)):
    for j in range(len(nodes)):
-      paths = list(dfs_paths(adjList, i, j))
+      paths = list(dfs_paths_recurse(adjList, i, j))
       index = []
       for k in range(len(paths)):
          if len(paths[k]) < linked_node_num:
