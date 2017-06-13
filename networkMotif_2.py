@@ -29,8 +29,8 @@ if (not (M.transpose() == M).all()):         #make sure M is symmetric (prints T
 G = nx.from_numpy_matrix(M)                  #create a networkx graph G from adjacency matrix M
 
 ############################################
-n = 4                                        #number of nodes of the desired subgraph 
-e = 4                                        #number of edges of the desired subgraph
+n = 3                                        #number of nodes of the desired subgraph 
+e = 2                                        #number of edges of the desired subgraph
 
 counter = 0                                  #counter to count the total number of subgraphs (n nodes, e edges) within a graph
 nodes = G.nodes()                            #extract all the nodes of G
