@@ -50,29 +50,23 @@ def generate_adjList(G):
       adjList[i] = G.neighbors(i)
    return adjList
 
-#could make this faster since dfs already gives realizations of length linked_node_num anywy
-#currently doesn't work when looking for duplicates
 def generate_realizations(adjList, linked_node_num):
    all_paths = []
    nodes = len(adjList)
-   for i in range(len(nodes)):
-      for j in range(len(nodes)):
+   for i in range(len(adjList)):
+      for j in range(len(adjList)):
          paths = list(dfs_paths(adjList, i, j, linked_node_num))
-         #index = []
-         #for k in range(len(paths)):
-         #   if len(paths[k]) < linked_node_num:
-         #      index.append(k)
-         #   else:
-         #      paths[k] = paths[k][:linked_node_num]
-         #paths = [l for m, l in enumerate(paths) if m not in index]
+         index = []
+         for k in range(len(paths)):
+            if len(paths[k]) < linked_node_num:
+               index.append(k)
+            else:
+               paths[k] = paths[k][:linked_node_num]
+         paths = [l for m, l in enumerate(paths) if m not in index]
          all_paths.append(paths)
    
    all_paths = sum(all_paths,[])
-   for i in range(len(all_paths)):
-      sublist = all_paths[i]
-      sublist = sorted(sublist)
-      all_paths[i] = sublist
-   
+   [k.sort() for k in all_paths]
    all_paths = np.array(all_paths)
    all_paths = DataFrame(all_paths).drop_duplicates().values
    realizations = list(all_paths)
@@ -92,7 +86,6 @@ def check_isomorphism(H_list):
       H_list = [i for j, i in enumerate(H_list) if j not in toremove] 
       all_types.append(types)     
    return all_types
-
 
 def generate_distances(G):
    edges = G.edges()
@@ -124,37 +117,11 @@ linked_node_num = 3
 n = linked_node_num                          #number of nodes of the desired subgraph 
 e = 2                                        #number of edges of the desired subgraph
 
-counter = 0                                  #counter to count the total number of subgraphs (n nodes, e edges) within a graph
-nodes = G.nodes()                            #extract all the nodes of G
 adjList = generate_adjList(G)
 
 print "generating realizations ..."
-######################################
+realizations = generate_realizations(adjList,linked_node_num)
 
-all_paths = []
-for i in range(len(nodes)):
-   for j in range(len(nodes)):
-      paths = list(dfs_paths(adjList, i, j, linked_node_num))
-      index = []
-      for k in range(len(paths)):
-         if len(paths[k]) < linked_node_num:
-            index.append(k)
-         else:
-            paths[k] = paths[k][:linked_node_num]
-      paths = [l for m, l in enumerate(paths) if m not in index]
-      all_paths.append(paths)
-
-all_paths = sum(all_paths,[])
-for i in range(len(all_paths)):
-   sublist = all_paths[i]
-   sublist = sorted(sublist)
-   all_paths[i] = sublist
-
-all_paths = np.array(all_paths)
-all_paths = DataFrame(all_paths).drop_duplicates().values
-realizations = list(all_paths)
-
-######################################
 print "finding all subgraphs ..."
 (H_list, counter) = find_subgraphs(G, realizations, n, e)
 
